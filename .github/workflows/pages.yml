@@ -16,8 +16,9 @@ jobs:
         uses: actions/setup-node@v1
       
       - name: Build NPM package
-        run: cd www/
-        run: npm run build
+        run: |
+          cd www/
+          npm run build
 
       - name: Publish to GitHub Pages
         uses: rayluo/github-pages-overwriter@v1.1
