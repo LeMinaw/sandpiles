@@ -4,16 +4,33 @@ on:
   push:
     branches:
       - 'main'
-
+      
+steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+    
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out
+      - name: Checkout
         uses: actions/checkout@v2
+        
+      - name: Setup NPM
+        uses: actions/setup-node@v1
+      
+      - name: Build NPM package
+      - run: cd www/
+      - run: npm run build
 
       - name: Publish to GitHub Pages
         uses: rayluo/github-pages-overwriter@v1.1
         with:
-          source-directory: www
+          source-directory: www/dist
           target-branch: gh-pages
