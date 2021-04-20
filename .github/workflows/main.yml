@@ -1,0 +1,19 @@
+name: Publish web demo
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+
+      - name: Publish to GitHub Pages
+        uses: rayluo/github-pages-overwriter@v1.1
+        with:
+          source-directory: www
+          target-branch: gh_pages
