@@ -18,6 +18,7 @@ jobs:
       - name: Build NPM package
         run: |
           cd www/
+          npm install
           npm run build
 
       - name: Publish to GitHub Pages
