@@ -11,10 +11,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Setup wasm-pack
+        uses: jetli/wasm-pack-action@v0.3.0
         
       - name: Setup NPM
         uses: actions/setup-node@v1
       
+      - name: Build WASM
+        run: wasm-pack build
+
       - name: Build NPM package
         run: |
           cd www/
